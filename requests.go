@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-func (SD *ServiceDesk) GetRequestFilters() (*[]RequestFilters, error) {
+func (SD *ServiceDesk) GetRequestFilters() (*RequestFilters, error) {
 	params := make(map[string]string)
 	params["OPERATION_NAME"] = "GET_REQUEST_FILTERS"
 
@@ -16,7 +16,7 @@ func (SD *ServiceDesk) GetRequestFilters() (*[]RequestFilters, error) {
 		return nil, err
 	}
 
-	filters := new([]RequestFilters)
+	filters := new(RequestFilters)
 	err = json.Unmarshal(data, &filters)
 	if err != nil {
 		fmt.Printf("%v\n", err)

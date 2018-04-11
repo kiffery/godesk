@@ -1,8 +1,19 @@
 package godesk
 
-// ugh
+//
 type RequestFilters struct {
-	ViewID   string `json:"VIEWID"`
+	Operation struct {
+		Result struct {
+			Status  string `json:"status"`
+			Message string `json:"message"`
+		} `json:"result"`
+	} `json:"operation"`
+	Details []Filters `json:"Details"`
+}
+
+// ugh
+type Filters struct {
+	ViewId   string `json:"VIEWID"`
 	ViewName string `json:"VIEWNAME"`
 }
 
