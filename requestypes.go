@@ -7,8 +7,8 @@ type RequestFilters struct {
 			Status  string `json:"status"`
 			Message string `json:"message"`
 		} `json:"result"`
+		Details []Filters `json:"Details"`
 	} `json:"operation"`
-	Details []Filters `json:"Details"`
 }
 
 // ugh

@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-func (SD *ServiceDesk) GetRequestFilters() (*RequestFilters, error) {
+func (SD *ServiceDesk) GetRequestFilters() (map[string]string, error) {
 	params := make(map[string]string)
 	params["OPERATION_NAME"] = "GET_REQUEST_FILTERS"
 
@@ -22,7 +22,12 @@ func (SD *ServiceDesk) GetRequestFilters() (*RequestFilters, error) {
 		fmt.Printf("%v\n", err)
 		return nil, err
 	}
-	return filters, err
+
+	queues := make(map[string]string)
+	for _, queue := range filters.Operation.Details {
+		queues[queue.ViewName] = queue.ViewId
+	}
+	return queues, err
 
 }
 

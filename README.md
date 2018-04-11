@@ -57,9 +57,20 @@ import (
     tasks, err := helper.GetTasks(20, "queue")
 ```
 
+#### Get RequestFilters/Queues
+```golang
+	// This example returns a map of all request filters and queues related to ServiceDesk instance
+    filters, err := helper.GetRequestFilters()
+	if err != nil {
+		fmt.Print("error")
+	}
+	for key, queue := range filters {
+		fmt.Printf("Pretty: %v\nActual: %v\n", key, queue)
+    }
+```
+
 ## TODO
 
 1. Make README better
 2. Create better examples
-3. Add getRequestFilters method to return available filters in specifyed **ManageEngine ServiceDesk** enviroment
-4. Fix spelling errors
+3. Fix spelling errors
