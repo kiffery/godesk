@@ -1,5 +1,22 @@
 package godesk
 
+//
+type RequestFilters struct {
+	Operation struct {
+		Result struct {
+			Status  string `json:"status"`
+			Message string `json:"message"`
+		} `json:"result"`
+		Details []Filters `json:"Details"`
+	} `json:"operation"`
+}
+
+// ugh
+type Filters struct {
+	ViewId   string `json:"VIEWID"`
+	ViewName string `json:"VIEWNAME"`
+}
+
 // input data for getting multiple requests
 type RequestInputData struct {
 	Operation RequestOperations `json:"operation"`

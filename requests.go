@@ -6,6 +6,31 @@ import (
 	"strconv"
 )
 
+func (SD *ServiceDesk) GetRequestFilters() (map[string]string, error) {
+	params := make(map[string]string)
+	params["OPERATION_NAME"] = "GET_REQUEST_FILTERS"
+
+	data, err := SD.callAPI("POST", V1API, "request", "", params)
+	if err != nil {
+		fmt.Printf("%v\n", err)
+		return nil, err
+	}
+
+	filters := new(RequestFilters)
+	err = json.Unmarshal(data, &filters)
+	if err != nil {
+		fmt.Printf("%v\n", err)
+		return nil, err
+	}
+
+	queues := make(map[string]string)
+	for _, queue := range filters.Operation.Details {
+		queues[queue.ViewName] = queue.ViewId
+	}
+	return queues, err
+
+}
+
 // Requires from(int), limit(int), and requested queue(string)
 // from is a starting point 0 is best choice
 // limit is how many requests we would get
